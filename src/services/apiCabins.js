@@ -23,7 +23,7 @@ export async function deleteCabin(id) {
 
 export async function createEditCabin(newCabin, id) {
   const hasImagePath = newCabin?.image?.startsWith?.(supabaseUrl);
-  
+
   let imagePath = newCabin.image;
 
   if (!hasImagePath) {
@@ -63,6 +63,8 @@ export async function createEditCabin(newCabin, id) {
     console.log(error);
     throw new Error('Cabin could not be created');
   }
+
+  console.log(data);
 
   return data;
 }
