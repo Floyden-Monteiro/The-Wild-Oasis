@@ -6,18 +6,9 @@ import { HiPencil, HiSquare2Stack, HiTrash } from 'react-icons/hi2';
 import { useCreateCabin } from './useCreateCabin';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Table from '../../ui/Table';
 
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 1.8fr 2.2fr 1fr 1fr 1fr;
-  column-gap: 2.4rem;
-  align-items: center;
-  padding: 1.4rem 2.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
-  }
-`;
 
 const Img = styled.img`
   display: block;
@@ -61,7 +52,7 @@ function CabinRow({ cabin }) {
 
   function handleDuplicate() {
     createCabin({
-      name: `Copy of${name}`,
+      name: `Copy of ${name}`,
       maxCapacity,
       regularPrice,
       discount,
@@ -70,11 +61,11 @@ function CabinRow({ cabin }) {
   }
 
   return (
-    <TableRow role='row'>
+    <Table.Row columns='0.6fr 1.8fr 2.2fr 1fr 1fr 1fr'>
       <Img src={image} alt={name} />
       <Cabin>{name}</Cabin>
-      <div>Fits up {maxCapacity} guests</div>
-      <Price>{formatCurrency(regularPrice)} </Price>
+      <div>Fits up to {maxCapacity} guests</div>
+      <Price>{formatCurrency(regularPrice)}</Price>
       <Discount>
         {discount ? formatCurrency(discount) : <span>&mdash;</span>}%
       </Discount>
@@ -90,9 +81,9 @@ function CabinRow({ cabin }) {
             </button>
           </Modal.Open>
 
-          <Modal.Windoow name='edit'>
+          <Modal.Window name='edit'>
             <CreateCabinForm cabinToEdit={cabin} />
-          </Modal.Windoow>
+          </Modal.Window>
 
           <Modal.Open opens='delete'>
             <button>
@@ -100,16 +91,16 @@ function CabinRow({ cabin }) {
             </button>
           </Modal.Open>
 
-          <Modal.Windoow name='delete'>
+          <Modal.Window name='delete'>
             <ConfirmDelete
               resource='cabin'
               disabled={isDeleting}
               onConfirm={() => deleteCabin(cabinId)}
             />
-          </Modal.Windoow>
+          </Modal.Window>
         </Modal>
       </div>
-    </TableRow>
+    </Table.Row>
   );
 }
 

@@ -78,7 +78,7 @@ function Open({ children, opens: opensWindoowName }) {
   return cloneElement(children, { onClick: () => open(opensWindoowName) });
 }
 
-function Windoow({ children, name }) {
+function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
 
   const ref = useOutsideClick(close);
@@ -101,6 +101,6 @@ function Windoow({ children, name }) {
 }
 
 Modal.Open = Open;
-Modal.Windoow = Windoow;
+Modal.Window = Window;
 
 export default Modal;
